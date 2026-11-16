@@ -23,7 +23,7 @@ PAGE = """<!doctype html>
   <title>Legeni WebApp - Version B</title>
   <style>
     body { font-family: sans-serif; margin: 0; background: #f4f6f8; }
-    header { background: blue; color: #fff; padding: 2rem; }
+    header { background: red; color: #fff; padding: 2rem; }
     main { padding: 2rem; }
     td { padding: .3rem 1rem .3rem 0; }
   </style>
