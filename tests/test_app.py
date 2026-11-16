@@ -50,3 +50,9 @@ def test_api_info(client):
     assert data["app"] == "legeni-webapp"
     assert data["version"] == "1.2.3"
     assert data["hostname"]
+
+
+def test_color_comes_from_env(monkeypatch):
+    monkeypatch.setenv("APP_COLOR", "#123456")
+    body = create_app(counter=MemoryCounter()).test_client().get("/").get_data(as_text=True)
+    assert "#123456" in body
