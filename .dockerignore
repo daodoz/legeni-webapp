@@ -3,8 +3,13 @@
 __pycache__/
 *.pyc
 .pytest_cache/
+.coverage
 reports/
 Jenkinsfile
 docker-compose*.yml
 nginx/
+deploy/
+ansible/
+docs/
+VERSION
 README.md

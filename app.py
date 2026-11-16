@@ -20,10 +20,10 @@ PAGE = """<!doctype html>
 <html lang="fr">
 <head>
   <meta charset="utf-8">
-  <title>Legeni WebApp - Version B</title>
+  <title>Legeni WebApp</title>
   <style>
     body { font-family: sans-serif; margin: 0; background: #f4f6f8; }
-    header { background: red; color: #fff; padding: 2rem; }
+    header { background: {{ color }}; color: #fff; padding: 2rem; }
     main { padding: 2rem; }
     td { padding: .3rem 1rem .3rem 0; }
   </style>

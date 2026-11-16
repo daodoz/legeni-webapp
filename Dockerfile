@@ -14,7 +14,7 @@ FROM base AS test
 COPY requirements-dev.txt .
 RUN pip install --no-cache-dir -r requirements-dev.txt
 COPY . .
-RUN flake8 . && pytest -q
+RUN flake8 . && pytest -q --cov=app --cov-report=term-missing --cov-fail-under=80
 
 # ---------- Étape 3 : image finale de production ----------
 FROM base AS runtime
