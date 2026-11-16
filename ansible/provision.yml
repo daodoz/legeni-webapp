@@ -1,0 +1,6 @@
+---
+- name: Provisionner la machine (Docker)
+  hosts: local
+  become: true
+  roles:
+    - docker
