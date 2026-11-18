@@ -1,6 +1,8 @@
 ---
-- name: Provisionner la machine (Docker)
+- name: Provisionner la machine (Docker, Minikube, Jenkins)
   hosts: local
   become: true
   roles:
     - docker
+    - minikube
+    - jenkins

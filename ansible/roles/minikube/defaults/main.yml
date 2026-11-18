@@ -1,0 +1,10 @@
+---
+minikube_user: dougl
+minikube_home: /home/dougl
+minikube_version: latest
+kubernetes_version: v1.31.0
+minikube_cpus: 4
+minikube_memory: 4096
+minikube_addons_to_enable:
+  - metrics-server
+  - ingress

@@ -1,0 +1,9 @@
+---
+jenkins_image: legeni/jenkins
+jenkins_tag: "1.0"
+jenkins_container: jenkins
+jenkins_build_dir: /opt/jenkins
+jenkins_volume: jenkins_home
+jenkins_http_port: 8080
+jenkins_agent_port: 50000
+jenkins_minikube_network: minikube
