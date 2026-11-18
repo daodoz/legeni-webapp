@@ -1,0 +1,61 @@
+---
+- name: Installer le SDK Python de Docker
+  ansible.builtin.apt:
+    name: python3-docker
+    state: present
+
+- name: Creer le dossier de build Jenkins
+  ansible.builtin.file:
+    path: "{{ jenkins_build_dir }}"
+    state: directory
+    mode: "0755"
+
+- name: Copier les fichiers de build Jenkins
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "{{ jenkins_build_dir }}/{{ item }}"
+    mode: "0644"
+  loop:
+    - Dockerfile
+    - plugins.txt
+  register: jenkins_files
+
+- name: Construire l'image Jenkins
+  community.docker.docker_image:
+    name: "{{ jenkins_image }}"
+    tag: "{{ jenkins_tag }}"
+    source: build
+    build:
+      path: "{{ jenkins_build_dir }}"
+    force_source: "{{ jenkins_files.changed }}"
+
+- name: Creer le volume jenkins_home
+  community.docker.docker_volume:
+    name: "{{ jenkins_volume }}"
+
+- name: Lire le GID du groupe docker
+  ansible.builtin.getent:
+    database: group
+    key: docker
+
+- name: Lancer le conteneur Jenkins
+  community.docker.docker_container:
+    name: "{{ jenkins_container }}"
+    image: "{{ jenkins_image }}:{{ jenkins_tag }}"
+    state: started
+    restart_policy: unless-stopped
+    ports:
+      - "{{ jenkins_http_port }}:8080"
+      - "{{ jenkins_agent_port }}:50000"
+    volumes:
+      - "{{ jenkins_volume }}:/var/jenkins_home"
+      - /var/run/docker.sock:/var/run/docker.sock
+    groups:
+      - "{{ getent_group['docker'][1] }}"
+
+- name: Connecter Jenkins au reseau de minikube
+  community.docker.docker_network:
+    name: "{{ jenkins_minikube_network }}"
+    connected:
+      - "{{ jenkins_container }}"
+    appends: true

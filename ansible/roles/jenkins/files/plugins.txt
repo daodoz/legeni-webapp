@@ -1,0 +1,14 @@
+workflow-aggregator
+git
+github
+github-branch-source
+pipeline-stage-view
+pipeline-utility-steps
+credentials-binding
+junit
+coverage
+warnings-ng
+timestamper
+ansicolor
+email-ext
+docker-workflow

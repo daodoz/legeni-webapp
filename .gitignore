@@ -24,3 +24,4 @@ reports/
 # Système
 .DS_Store
 Thumbs.db
+kubeconfig-jenkins.yml
